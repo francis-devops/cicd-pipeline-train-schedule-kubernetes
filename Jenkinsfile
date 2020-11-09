@@ -1,8 +1,7 @@
 pipeline {
     agent any
     environment {
-        //be sure to replace "willbla" with your own Docker Hub username
-        DOCKER_IMAGE_NAME = "willbla/train-schedule"
+        DOCKER_IMAGE_NAME = "francis535/train-schedule"
     }
     stages {
         stage('Build') {
@@ -13,8 +12,6 @@ pipeline {
             }
         }
         stage('Build Docker Image') {
-            when {
-                branch 'master'
             }
             steps {
                 script {
@@ -26,8 +23,6 @@ pipeline {
             }
         }
         stage('Push Docker Image') {
-            when {
-                branch 'master'
             }
             steps {
                 script {
@@ -39,8 +34,6 @@ pipeline {
             }
         }
         stage('DeployToProduction') {
-            when {
-                branch 'master'
             }
             steps {
                 input 'Deploy to Production?'
